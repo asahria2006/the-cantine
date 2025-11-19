@@ -1,0 +1,63 @@
+
+
+// // Override variables 
+// $primary: #1c8c9b;
+// $scondary: #152f331f;  
+// $light: #feffea;
+// $border-color: #1c8c9b44;
+
+// $text-primary: white; 
+
+
+// // COLOR V1
+// // Override variables
+// $primary:   #92a1d1;   // Main brand color — soft lavender blue
+// $secondary: #aab4d8;   // Gentle complementary tone
+// $success:   #9ed1b5;   // Soft green, balances the cool palette
+// $info:      #87c3d7;   // Calm light teal for info elements
+// $warning:   #f2d59a;   // Warm creamy yellow for highlights
+// $danger:    #e69b9b;   // Muted coral red for warnings
+// $light:     #f8f9fc;   // Light background with a hint of blue
+// $dark:      #2f3b58;   // Deep bluish gray for text and contrast
+// $border-color: #d8deec; // Subtle, slightly blue-tinted border
+
+
+
+//
+
+
+// VERSION 2 - color 
+// Override variables
+// Override variables
+$primary:   #5d6cb0;   // Main brand color — lavender-blue
+$secondary: #92a1d1;   // Stronger complementary indigo tone
+$success:   #3fa97b;   // Fresh emerald green
+$info:      #717b7e;   // Vivid teal-blue for info 
+$warning:   #f2b84b;   // Bold golden-yellow
+$danger:    #e05b5b;   // Vivid coral-red for errors
+$light:     #f3f5fc;   // Clean, soft off-white
+$dark:      #1f2b45;   // Deep navy-gray for high contrast
+$border-color: #c2cae2; // More visible but still subtle border
+
+// Optional: improve contrast and legibility
+$body-bg: #f5f7fc;
+$body-color: #202535;
+$link-color: darken($primary, 10%);
+$link-hover-color: darken($primary, 18%);
+
+// $list-group-border-color: var(--#{$prefix}border-color);
+$list-group-border-width: .25rem;
+
+
+
+$btn-border-radius: 4rem;
+
+// Import Bootstrap's functions 
+// @import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../bootstrap-5.3.8/scss/functions";
+
+// Import Bootstrap's variables
+@import "../../../bootstrap-5.3.8/scss/variables";
+
+
+@import "../../../bootstrap-5.3.8/scss/bootstrap"; 

@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/calendar.css') }}">
+{% endblock %}
+
+{% block main %}
+
+    <div class="container">
+        <div class="d-flex justify-content-around mt-5 mb-2">
+            <div class="calendar-container col-8">
+                <div id="header" class="text-primary">
+                    <div id="monthDisplay"></div>
+                    <div>
+                        <button id="backButton" class="btn btn-primary px-3 shadow">Back</button>
+                        <button id="nextButton" class="btn btn-primary px-3 shadow">Next</button>
+                    </div>
+                </div>
+
+                <div id="weekdays" class="justify-content-around text-center text-primary fw-semibold">
+                    <div>Monday</div>
+                    <div>Tuesday</div>
+                    <div>Wednesday</div>
+                    <div>Thursday</div>
+                    <div>Friday</div>
+                    <div>Saturday</div>
+                    <div>Sunday</div>
+                </div>
+
+                <div id="calendar"></div>
+            </div>
+
+            <div class="col-3">
+                <p class="fs-5 fw-medium text-success mt-4 mb-3">Reserved Day:</p>
+                <ul class="text-success scrollable-list px-2" id="reservedList">
+                    <!-- <li class="list-group-item border-success-subtle d-flex justify-content-between">
+                        <span class="fw-medium text-success">An active item</span>
+                        <button class="btn btn-danger py-0"><i class="bi bi-x-circle text-light"></i></button>
+                    </li> -->
+
+                    <!-- rendered by js  -->
+                </ul>
+            </div>
+
+            
+        </div>
+
+
+        
+    </div>
+
+    <!-- <div id="newEventModal">
+        <h2> Add new Resevation</h2>
+        <span class="date"> </span>
+        <button id="saveButton" class="btn btn-primary">Save</button>
+        <button id="cancelButton" class="btn btn-danger text-white"> Cancel</button>
+    </div> -->
+
+    <div class="modal" tabindex="-1" id="newEventModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary">New Reservation</h5>
+                <button type="button" class="btn-close" id="crossButton"></button>
+            </div>
+            <div class="modal-body">
+                <p>Date</p>
+
+                <h5> Today menus: </h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                <button type="button" class="btn btn-danger text-light" id="cancelButton"></button>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div id="modalBackDrop" class="modalBackDrop">
+    </div>
+    
+    
+{% endblock %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='js/reservation.js') }}" type="module">
+    </script>
+{% endblock %}

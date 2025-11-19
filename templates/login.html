@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block main %}
+    <main>
+        <div class="container">
+            <div class="justify-content-center d-flex">
+                <div class="col-6 my-4">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control border-primary" id="username" aria-describedby="username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control border-primary" id="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary text-light fw-medium px-4 shadow">Login</button>
+                        <div>
+                            <p class="lead pt-3 fs-6"> If you're not registered yet <a class="link" href="/register">click here</a> to register.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+        
+    </main>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script> 
+    
+    <script>
+    </script>
+{% endblock %}

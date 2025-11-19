@@ -1,0 +1,42 @@
+a.no-underline {
+  text-decoration: none;
+}
+
+.last-login {
+  font-size: 0.75rem;
+}
+
+.scrollable-list {
+  max-height: 600px; 
+  overflow-y: auto;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+
+
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 5px grey;  */
+  border-radius: 4px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #717b7e; 
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #5c6468; 
+}

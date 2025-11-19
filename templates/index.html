@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+{% block main %}
+<section id="hero">
+    <div class="container-lg">
+        <div class="row justify-content-center align-items-center">
+            <div class="my-5 col-md-5 text-center text-md-start">
+                <h1 class="mt-5">Welcome Back {{user.firstname}}! </h1>
+                <p class="fw-bold">Your balance : {{user.balance}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="summury" class="bg-light">
+    <div class="container">
+        <div class="d-flex flex-column py-3">
+            <span class="fs-5 fw-bold">Name: {{user.firstname}} {{user.lastname}}</span>
+            <span class="fs-5 fw-bold">Class: {{user.section}}</span>
+            <span class="fs-5 fw-bold">Tier: {{user.tier}}</span>
+            <span class="fs-5 fw-bold">Balance: {{user.balance}}</span>
+        </div>
+    </div>
+</section>
+
+<section class="box">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-12 col-lg-3 my-4 d-flex justify-content-center">
+                <div class="card border border-2 border-primary bg-white rounded-5 shadow" style="width: 18rem;">
+                    <div class="card-body px-4">
+                        <h5 class="card-title mb-5 pt-2 pb-3 fs-4 text-primary">Reservation</h5>
+                        <!-- <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                        <a href="#" class="card-link">Card link</a> -->
+                        <div class="d-flex justify-content-end">
+                            <a href="/reservation">
+                                <button class="btn btn-primary rounded-pill px-3">
+                                    <i class="bi bi-arrow-right text-white"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-3 my-4 d-flex justify-content-center">
+                <div class="card border border-2 border-primary bg-white rounded-5 shadow" style="width: 18rem;">
+                    <div class="card-body px-4">
+                        <h5 class="card-title mb-5 pt-2 pb-3 fs-4 text-primary">Payments</h5>
+                        <!-- <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                        <a href="#" class="card-link">Card link</a> -->
+                        <div class="d-flex justify-content-end">
+                            <a href="/payments">
+                                <button class="btn btn-primary rounded-pill px-3">
+                                    <i class="bi bi-arrow-right text-white"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-3 my-4 d-flex justify-content-center">
+                <div class="card border border-2 border-primary bg-white rounded-5 shadow" style="width: 18rem;">
+                    <div class="card-body px-4">
+                        <h5 class="card-title mb-5 pt-2 pb-3 fs-4 text-primary">Personal Info</h5>
+                        <!-- <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                        <a href="#" class="card-link">Card link</a> -->
+                        <div class="d-flex justify-content-end">
+                            <a href="/personal_info">
+                                <button class="btn btn-primary rounded-pill px-3">
+                                    <i class="bi bi-arrow-right text-white"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-3 my-4 d-flex justify-content-center">
+                <div class="card border border-2 border-primary bg-white rounded-5 shadow" style="width: 18rem;">
+                    <div class="card-body px-4">
+                        <h5 class="card-title mb-5 pt-2 pb-3 fs-4 text-primary">History</h5>
+                        <!-- <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                        <a href="#" class="card-link">Card link</a> -->
+                        <div class="d-flex justify-content-end">
+                            <a href="history">
+                                <button class="btn btn-primary rounded-pill px-3">
+                                    <i class="bi bi-arrow-right text-white"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</section>
+
+{% endblock %}
