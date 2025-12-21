@@ -15,10 +15,3 @@ def login_required(f):
         return f(*args, **kwargs)
 
     return decorated_function
-
-
-def obj_to_dict(obj):
-    result = []
-    for c in obj.__table__.columns:
-        result[c.name] = getattr(obj, c.name)
-    return result

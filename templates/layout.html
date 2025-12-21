@@ -20,7 +20,7 @@
                     <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-semibold">
                             <li class="nav-item">
                             <a class="nav-link" id="/" href="/">Home</a>
                             </li>
@@ -33,17 +33,6 @@
                             </li>
                             <a class="nav-link" href="/history">History</a>
                             </li>
-                            <!-- <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -51,8 +40,8 @@
                     {% if session["user_id"] %}
                         <div class="d-flex flex-column justify-content-center">
 
-                            <span class="fs-5 fw-medium pe-3 text-end">{{user.username}}</span>
-                            <span class="last-login pe-3">Last login: {{user.lastlogin.strftime('%a %d %b %Y, %I:%M%p')}}</span>
+                            <span class="fs-5 fw-medium pe-3 text-end text-success">{{user.username}}</span>
+                            <span class="last-login pe-3 text-primary">Last login: {{user.lastlogin.strftime('%a %d %b %Y, %I:%M%p')}}</span>
                         </div>
                         <div>
                             <a href="/login">
@@ -60,7 +49,7 @@
                             </a>
                         </div>
                     {% else %}
-                        <span class="fs-5 fw-medium my-2 pe-3">Lincoln High School</span>
+                        <span class="fs-5 fw-medium my-2 pe-3 text-primary">Lincoln High School</span>
                         <div>
                             <a href="/login">
                                 <button class="btn btn-primary mx-2 text-light fw-medium my-1" id="loginBtn">Log in</button>
@@ -75,7 +64,39 @@
     </header>
     {% block main%}{% endblock %}
 
-     <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+    <!-- <div class="position-relative z-2">
+        <div class="toast-container top-0 end-0 p-3">
+            <div class="toast fw-bold text-primary border align-items-center shadow-lg" id="toast">
+                <div class="d-flex">
+                    <div class="toast-body" id="toastMessage">
+                    Hello, world! This is a toast message.
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" id="closeToast"></button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toast" class="toast bg-white toast-animation" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill text-primary me-2" viewBox="0 0 16 16">
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
+                </svg>
+                <strong class="me-auto text-primary" id="routeName"></strong>
+                <!-- <small>11 mins ago</small> -->
+                <button type="button" class="btn-close" id="closeToast"></button>
+            </div>
+            <div class="toast-body" id="toastMessage">
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+     <script src="{{ url_for('static', filename='js/layout.js') }} " type="module"></script>
     
     {% block script%}{% endblock %}
 </body>

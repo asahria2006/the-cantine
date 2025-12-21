@@ -1,4 +1,6 @@
 
+const modal = document.getElementById('termConditionModal');
+
 document.querySelector('#registerForm').addEventListener('submit', async (e) => {
     // prevent all default action by form
     e.preventDefault();
@@ -11,10 +13,16 @@ document.querySelector('#registerForm').addEventListener('submit', async (e) => 
         email: document.querySelector('#email').value,
         username: document.querySelector('#username').value,
         password: document.querySelector('#password').value,
-        confirmpassword: document.querySelector('#confirmPassword').value
+        confirmpassword: document.querySelector('#confirmPassword').value,
+        termCondition: document.querySelector('#termCondition').checked
     }
 
-    // form validation
+    // form validatio
+
+    if(!data.termCondition){
+        alert('Please agree terms and condion!');
+        return;
+    }
 
     if (!data.firstname || !data.lastname || !data.studentClass || !data.tier || !data.email 
         || !data.username || !data.password || !data.confirmpassword
@@ -48,9 +56,18 @@ document.querySelector('#registerForm').addEventListener('submit', async (e) => 
         const result = await response.json();
 
 
+        // if(response.ok){
+        //     alert(result.message);
+        //     window.location.href = result.redirect;
+
+        // } else {
+        //     alert(result.message)
+        // }
+
         if(response.ok){
-            // alert(result.message)
-            alert(result.message);
+            localStorage.setItem('toastMessage', JSON.stringify(
+                {routeName: 'Registration', message: result.message}
+            ));
             window.location.href = result.redirect;
 
         } else {
@@ -64,27 +81,12 @@ document.querySelector('#registerForm').addEventListener('submit', async (e) => 
 });
 
 
+document.getElementById('termsConditionsPanel').addEventListener('click', () => {
+    
 
+    modal.style.display = 'block';
+});
 
-
-
-function test(){
-    const data = {
-        firstname: document.querySelector('#firstName').value,
-        lastname: document.querySelector('#lastName').value,
-        studentClass: document.querySelector('#studentClass').value,
-        tier: document.querySelector('#tier').value,
-        email: document.querySelector('#email').value,
-        username: document.querySelector('#username').value,
-        password: document.querySelector('#password').value,
-        confirmpassword: document.querySelector('#confirmPassword').value
-    }
-
-    if (data.studentClass == ''){
-        console.log("its null");
-    }
-
-    console.log(data);
-}
-
-//11
+document.getElementById('closeTermModal').addEventListener('click', () => {
+    modal.style.display = 'none';
+});

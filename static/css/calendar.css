@@ -47,7 +47,6 @@
   width: 100px;
   padding: 10px;
   height: 100px;
-  cursor: pointer;
   box-sizing: border-box;
   background-color: white;
   margin: 5px;
@@ -55,9 +54,16 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 .day:hover {
+  cursor: not-allowed;
+}
+.day-active:hover {
+  cursor: pointer;
   background-color: #c2cae2;
+  transform: scale(1.02);
 }
 
 .day + #currentDay {

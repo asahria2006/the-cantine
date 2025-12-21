@@ -1,4 +1,4 @@
-
+import {toastMessage} from './layout.js';
 
 export function getDayColor(day, events) {
 
@@ -31,12 +31,6 @@ export function getDayColor(day, events) {
 
 export async function fetch_to_backend (date) {
 
-    // const dateString = date.toLocaleDateString('en-GB', {
-    //     year: 'numeric',
-    //     month: 'short',
-    //     day: 'numeric'
-    // });
-
     const data = {
         date: date
     }
@@ -54,11 +48,11 @@ export async function fetch_to_backend (date) {
 
 
         if(response.ok){
-            alert(result.message);
-            // window.location.href = result.redirect;
+            // alert(result.message);
+            toastMessage('Reservation', result.message);
 
         } else {
-            alert(result.message)
+            toastMessage('Reservation', result.message);
         }
 
     } catch (error){
@@ -68,22 +62,11 @@ export async function fetch_to_backend (date) {
 
 export async function getEvents(){
     try {
-        
         // submit data to backend
         const response = await fetch('/reservation_data');
 
         // get response from server
         const result = await response.json();
-
-
-        // if(response.ok){
-        //     // alert(result.message)
-        //     alert(result.message);
-        //     window.location.href = result.redirect;
-
-        // } else {
-        //     alert(result.message)
-        // }
 
         return result.data;
 
@@ -93,9 +76,7 @@ export async function getEvents(){
 }
 
 export async function fetchRemovedReservation(date) {
-
     try {
-        
         const data = {
             date: date
         }
@@ -111,11 +92,10 @@ export async function fetchRemovedReservation(date) {
 
 
         if(response.ok){
-            alert(result.message);
-            // window.location.href = result.redirect;
+            toastMessage('Reservation', result.message);
 
         } else {
-            alert(result.message)
+            toastMessage('Reservation', result.message)
         }
 
     } catch (error){

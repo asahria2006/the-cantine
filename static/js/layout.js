@@ -8,3 +8,28 @@ navlist.forEach((element) => {
     }
 
 });
+
+
+export function toastMessage(routeName, message) {
+    const toast = document.getElementById('toast');
+    
+    toast.style.display = 'block';
+
+    const closeButton = document.getElementById('closeToast');
+
+    document.getElementById('routeName').innerHTML = routeName;
+    document.getElementById('toastMessage').innerHTML = message;
+
+    closeButton.addEventListener('click', () => {
+        toast.style.display = 'none';
+    });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const msg = JSON.parse(localStorage.getItem('toastMessage'));
+
+    if (msg) {
+        toastMessage(msg.routeName, msg.message);
+        localStorage.removeItem('toastMessage');
+    }
+});

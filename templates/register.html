@@ -5,49 +5,73 @@
             <div class="justify-content-center d-flex">
                 <div class="col-6 my-4">
                     <form id="registerForm">
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="firstName" class="form-label text-primary">First Name</label>
+                                <input type="text" class="form-control bg-white "  id="firstName" name="first_name" disabled>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="lastName" class="form-label text-primary">Last Name</label>
+                                <input type="text" class="form-control bg-white " id="lastName" name="last_name">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 col-8">
+                                <label for="class" class="form-label text-primary">Class</label>
+                                <input type="text" class="form-control bg-white " id="studentClass" name="class">
+                            </div>
+                            <div class="mb-3 col-4">
+                                <label for="tier" class="form-label text-primary">Tier</label>
+                                <input type="number" class="form-control bg-white " id="tier" name="tier">
+                            </div>
+                        </div>
+                        
+                        
                         <div class="mb-3">
-                            <label for="firstName" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="firstName" name="first_name">
+                            <label for="email" class="form-label text-primary">Email</label>
+                            <input type="email" class="form-control bg-white " id="email" name="email">
                         </div>
                         <div class="mb-3">
-                            <label for="lastName" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" name="last_name">
+                            <label for="username" class="form-label text-primary">Choise an username</label>
+                            <input type="text" class="form-control bg-white " id="username" name="username">
                         </div>
                         <div class="mb-3">
-                            <label for="class" class="form-label">Class</label>
-                            <input type="text" class="form-control" id="studentClass" name="class">
-                        </div>
-                        <div class="mb-3">
-                            <label for="tier" class="form-label">Tier</label>
-                            <input type="number" class="form-control" id="tier" name="tier">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Choise an username</label>
-                            <input type="text" class="form-control" id="username" name="username">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <label for="password" class="form-label text-primary" required>Password</label>
+                            <input type="password" class="form-control bg-white " id="password" name="password">
                         </div>
 
                         <div class="mb-3">
-                            <label for="password" class="form-label">Confirm your password</label>
-                            <input type="password" class="form-control" id="confirmPassword" name="confirm_password">
+                            <label for="password" class="form-label text-primary" required>Confirm your password</label>
+                            <input type="password" class="form-control bg-white " id="confirmPassword" name="confirm_password">
                         </div>
-
                         <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">I agree all <a class="link" href="/termsandconditions">termes & conditions</a> </label>
+                            <input type="checkbox" class="form-check-input" id="termCondition">
+                            <label class="form-check-label text-primary">I agree all <a class="link" id="termsConditionsPanel">termes & conditions</a> </label>
                         </div>
                         <button class="btn btn-primary px-4 fw-medium text-light" id="registerButton">Register</button>
                     </form>
                 </div>
             </div>
             
+        </div>
+
+        <div class="modal fade d-none" id="termConditionModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    </div>
+                <div class="modal-body">
+                  <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat in unde doloribus quod iste numquam beatae, expedita deserunt illo corporis error voluptatum excepturi neque tempora dignissimos laboriosam. Impedit pariatur a excepturi qui quisquam repudiandae magnam dolore aut magni? Asperiores vitae exercitationem beatae harum quae, expedita earum voluptates ducimus rerum nemo vero maiores laudantium odio enim quis, perferendis quas veniam a! Nam, quibusdam, consequatur ullam ipsam similique, beatae laborum suscipit quae magnam fugiat numquam perferendis sequi? Facere eligendi reprehenderit nesciunt et tempore amet, illo, deserunt labore ea, similique obcaecati qui nemo consequatur minus repudiandae aut voluptatum veniam officia. Fuga totam dolor ipsam earum et fugiat voluptatum sequi magni minus ducimus excepturi dolore officiis quam animi doloribus eaque illo sit rerum similique, tenetur est suscipit incidunt architecto! Sunt expedita eos nulla neque iste deserunt facilis explicabo, animi quam ducimus omnis eum harum magnam nisi fugit dolore, beatae sequi mollitia veritatis. Error natus nostrum laboriosam sed deserunt, tempora ab tenetur porro sunt doloribus saepe atque necessitatibus veritatis rerum, cumque modi. Suscipit quia laudantium illo! Illum, modi! Est expedita amet nemo quibusdam facere, corrupti saepe similique autem placeat repellendus obcaecati accusamus eius. Exercitationem repudiandae assumenda sunt error aspernatur tenetur tempore deserunt distinctio laboriosam placeat, ipsa quia, architecto similique aut hic optio necessitatibus quos esse voluptates. Nihil ex voluptas consequuntur animi asperiores? Dolorum velit nisi numquam sapiente totam error nobis hic temporibus id repellat esse ut facere mollitia rerum provident ipsum, inventore odio dignissimos. Impedit vitae doloribus ipsum, rerum tempora excepturi eveniet, voluptatem, minima hic incidunt quaerat. Cumque accusantium tempora eligendi hic laborum consectetur vitae suscipit sed sequi architecto, voluptatum illum. Itaque excepturi fugit quisquam accusamus odit magnam voluptates dicta maxime dolores illum iure eligendi, molestias dolorem voluptatibus ab aut dolorum, id iste. Labore, nisi? Voluptatum modi maxime vero repellat qui dolor aliquam saepe, recusandae, necessitatibus consequuntur obcaecati! Facere odit inventore, cupiditate corporis ipsum recusandae nam est dolor aperiam mollitia, quis soluta, id saepe praesentium ducimus dolorem cumque odio. Unde voluptatem quisquam corporis perspiciatis obcaecati numquam aspernatur eius dolorum libero minus similique temporibus voluptatum mollitia vero, adipisci id cupiditate fuga atque suscipit aut necessitatibus tempora. Ipsum, explicabo nesciunt! Cumque maiores ipsum adipisci accusantium et nisi sit quibusdam delectus cupiditate quas neque numquam repellendus, ea, alias suscipit odio aut ullam. Quaerat laborum cum et tempora nemo eligendi nulla voluptas recusandae magnam ut commodi libero minima voluptatum modi velit, fuga rem rerum natus sapiente neque dolorum quam? Deleniti expedita aliquam, sequi ad quasi laudantium deserunt sed, harum impedit non minima rem cum nostrum veniam laboriosam autem enim neque quam nemo et fugit voluptatibus at perspiciatis nulla. Laudantium laboriosam velit dicta aut rerum, totam dolores incidunt perferendis eius eum saepe impedit ullam, nulla deleniti, doloremque consequatur inventore dolore dolor at corrupti maxime vel labore. Quisquam aperiam sequi animi fugit itaque sunt non totam veniam a perspiciatis tempora expedita, perferendis voluptas reprehenderit harum in iste cupiditate saepe recusandae amet esse beatae quis. Animi in dolores nostrum quos delectus ipsum rerum provident ullam repudiandae, quisquam temporibus beatae suscipit quis perferendis.
+                  </p>  
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="closeTermModal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
         
     </main>

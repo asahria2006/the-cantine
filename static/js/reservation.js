@@ -3,18 +3,13 @@ import {getDayColor, fetch_to_backend, getEvents, fetchRemovedReservation} from 
 let nav = 0;
 let clicked = null;
 
-// let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
-
-
 const newEventModal = document.getElementById('newEventModal');
 const backdrop = document.getElementById('modalBackDrop');
 const cancelButton = document.getElementById('cancelButton');
+const saveButton = document.getElementById('saveButton');
 
 const calendar = document.getElementById('calendar');
 const reservedList = document.getElementById('reservedList');
-
-// reserved day list elements
-
 
 // weeddays in a list, later used to check padding days
 const weekdays = [
@@ -29,7 +24,6 @@ const weekdays = [
 
 // we have to fetch info from backend
 let events;
-
 
 async function load() {
     const dt = new Date();
@@ -95,11 +89,16 @@ async function load() {
             `;
 
             // check if its reserved show green dot and directly make inner html
+            if (color !== 'info') {
+
+                daySquare.classList.add('day-active');
+
+                daySquare.addEventListener('click', () => {
+                    openModal(currentDate);
+                    
+                });
+            }
             
-            daySquare.addEventListener('click', () => {
-                // openModal(`${i-paddingDays}/${month+1}/${year}`);
-                openModal(currentDate);
-            });
 
         } else {
             daySquare.classList.add('padding');
@@ -138,15 +137,14 @@ function openModal(date) {
     backdrop.style.display = 'block';
 }
 
-function closeModal() {
+async function closeModal() {
     newEventModal.style.display = 'none';
     backdrop.style.display = 'none';
     clicked = null;
-    load();
+    await load();
 }
 
 async function saveEvent() {
-
     const dateString = clicked.toLocaleDateString('en-GB', {
         year: 'numeric',
         month: 'short',
@@ -161,70 +159,61 @@ async function saveEvent() {
         await fetch_to_backend(dateString);
     }
 
-    closeModal();
+    await closeModal();
     await loadReservedList();
-    load();
-    // window.location.reload();
+
 }
 
 function initButton() {
-    document.getElementById('nextButton').addEventListener('click', () => {
+    document.getElementById('nextButton').addEventListener('click', async () => {
         nav++;
-        load();
+        await load();
     });
 
-    document.getElementById('backButton').addEventListener('click', () => {
+    document.getElementById('backButton').addEventListener('click', async () => {
         nav--;
-        load();
+        await load();
     });
 
     document.getElementById('saveButton').addEventListener('click', saveEvent);
-    document.getElementById('cancelButton').addEventListener('click', closeModal);
-    document.getElementById('crossButton').addEventListener('click', closeModal);
+    document.getElementById('cancelButton').addEventListener('click', async () => {await closeModal()});
+    document.getElementById('crossButton').addEventListener('click', async () => {await closeModal()});
 
 }
 
 async function loadReservedList() {
     events = await getEvents();
+    const today = new Date;
 
-   
-    events.forEach((element) => {
+    const filteredList = events.filter((element) => {
         element.dateObj = new Date(element.date);
+
+        if (element.dateObj < today){
+            return false;
+        }
+
+        return true;
     });
 
-    events.sort((a, b) => a.dateObj - b.dateObj);
+    filteredList.sort((a, b) => a.dateObj - b.dateObj);
 
-     console.log(events);
-
-
-
-    if (events.length == 0) {
+    if (filteredList.length == 0) {
         reservedList.innerHTML = `
             <li class="py-2 px-3 border border-1 border-info-subtle rounded-1 shadow-sm d-flex justify-content-between my-1">
                 <span class="fw-medium text-danger">No reserved day!</span>
             </li>
         `;
-
-
         return;
     }
 
-    // console.log(events.length);
-
     let listHtml = '';
 
-    for(let i = 0; i < events.length; i++){
-        // listHtml += `
-        //     <li class="list-group-item border-success-subtle d-flex justify-content-between">
-        //         <span class="fw-medium text-success">${events[i].date}</span>
-        //         <button class="btn btn-danger py-0" id="removeReservation" data-date="${events[i].date}"><i class="bi bi-x-circle text-light"></i></button>
-        //     </li>
-        // `;
+    for(let i = 0; i < filteredList.length; i++){
 
         listHtml += `
             <li class="py-2 px-3 border border-1 border-info-subtle rounded-1 shadow-sm d-flex justify-content-between my-1">
-                <span class="fw-medium text-success">${events[i].date}</span>
-                <button class="btn btn-danger py-0" id="removeReservation" data-date="${events[i].date}"><i class="bi bi-x-circle text-light"></i></button>
+                <span class="fw-medium text-success">${filteredList[i].date}</span>
+                <button class="btn btn-danger py-0 js-removeReservation" data-date="${filteredList[i].date}"><i class="bi bi-x-circle text-light"></i></button>
             </li>
         `;
 
@@ -232,27 +221,22 @@ async function loadReservedList() {
     
     reservedList.innerHTML = listHtml;
 
-    const list = document.querySelectorAll('#removeReservation');
+    const list = document.querySelectorAll('.js-removeReservation');
     
     list.forEach((element) => {
         element.addEventListener('click', async function(){
-            console.log('clicked');
             await remove_reservation(element.dataset.date);
         });
     });
 
-    
 }
 
 async function remove_reservation(date) {
-    
     await fetchRemovedReservation(date);
     await loadReservedList();
-    load();
-
+    await load();
 }
 
 initButton();
 load();
 loadReservedList();
-

@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block main %}
-<section id="hero">
+<!-- <section id="hero">
+    <img src="../static/images/hero.jpg" alt="" class="image-fluid">
     <div class="container-lg">
         <div class="row justify-content-center align-items-center">
             <div class="my-5 col-md-5 text-center text-md-start">
@@ -9,20 +10,41 @@
             </div>
         </div>
     </div>
+</section> -->
+
+<section id="hero" style="
+    background-image: url('../static/images/hero-2.jpg');
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    ">
+
+    <div class="p-5 text-center h-100" style="background-color: rgba(0, 0, 0, 0.7);">
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white">
+                <h1 class="mb-3">Welcome Back {{user.firstname}}! </h1>
+                <h4 class="mb-3">Your one stop solution for school meals</h4>
+            </div>
+        </div>
+    </div>
+
 </section>
 
-<section id="summury" class="bg-light">
+
+<section id="summury" class="bg-light border-bottom bg-white shadow-sm">
     <div class="container">
-        <div class="d-flex flex-column py-3">
-            <span class="fs-5 fw-bold">Name: {{user.firstname}} {{user.lastname}}</span>
-            <span class="fs-5 fw-bold">Class: {{user.section}}</span>
-            <span class="fs-5 fw-bold">Tier: {{user.tier}}</span>
-            <span class="fs-5 fw-bold">Balance: {{user.balance}}</span>
+        <div class="d-flex justify-content-center">
+            <div class="d-flex col-10 justify-content-around flex-row text-center text-primary">
+            <span class="fs-5 col-3 fw-semibold p-3 py-4 border-end border-2">Name: {{user.firstname}} {{user.lastname}}</span>
+            <span class="fs-5 col-3 fw-semibold p-3 py-4 border-end border-2">Class: {{user.section}}</span>
+            <span class="fs-5 col-3 fw-semibold p-3 py-4 border-end border-2">Tier: {{user.tier}}</span>
+            <span class="fs-5 col-3 fw-semibold p-3 py-4">Balance: <span class="text-success">{{user.balance}}€</span></span>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="box">
+<section class="box mt-5">
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-12 col-lg-3 my-4 d-flex justify-content-center">

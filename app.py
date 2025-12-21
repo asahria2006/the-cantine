@@ -1,18 +1,17 @@
 from flask import Flask, render_template, request, session, jsonify
 from flask_session import Session as FlaskSession
-from helpers import login_required, obj_to_dict
+from helpers import login_required
 from datetime import datetime, timedelta, date
-import calendar
 from werkzeug.security import generate_password_hash, check_password_hash
 
 #data base 
 from sqlalchemy import create_engine, Select
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
-from models import Base, User, Reservation, Tier
+from models import Base, User, Reservation, Tier, Recharge_code
 
 
-#database 
+#database Recharge_code
 engine = create_engine("sqlite:///cantine.db", echo=True)
 Base.metadata.create_all(engine)
 
@@ -112,6 +111,11 @@ def register():
                 return jsonify({
                     'message': 'something went wrong please try again'
                 }), 400
+            
+        if not user_data.get("termCondition"):
+            return jsonify({
+                'message': 'accept term condition'
+            }), 400
         
         #check for password
         password = user_data.get("password")
@@ -140,6 +144,7 @@ def register():
             lastname = user_data.get("lastname"),
             section = user_data.get("studentClass"),
             tier = user_data.get("tier"),
+            email = user_data.get("email"),
             hashcode = generate_password_hash(password),
             lastlogin = datetime.now(),
             balance = float(50)
@@ -161,9 +166,7 @@ def register():
                 "success": False,
                 "message": "There is an internal server error, please try again :( ",
                 # "redirect": "/register"  # frontend will redirect
-            }), 500
-        
-        
+            }), 500     
 
     else:
         return render_template("register.html")
@@ -212,7 +215,7 @@ def reservation():
             db_session.commit()
             return jsonify({
                 "success": True,
-                "message": "Date added",
+                "message": f"Reserved for {reservation_data.get("date")} ",
                 "redirect": "/reservation"  # frontend will redirect
             }), 200
         
@@ -227,15 +230,53 @@ def reservation():
 
     else:
         return render_template("reservation.html", user=user, user_id=session["user_id"])
-    # C = calendar.HTMLCalendar(firstweekday=0)
 
-    # c = C.formatmonth(year, month, withyear=True)
 
 @app.route("/payments", methods=["GET", "POST"])
 @login_required
 def payments():
     user = db_session.query(User).filter(User.id == session["user_id"]).first()
-    return render_template("payments.html", user=user)
+
+    if request.method == "POST":
+        data = request.get_json()
+
+        coupon_code = data.get("code")
+
+        matched_code = db_session.query(Recharge_code).filter(Recharge_code.code == coupon_code).first()
+
+        if not matched_code: 
+            return jsonify({
+                "success": False,
+                "message": "Invalid Code or the code is already used. :("
+            }), 400
+    
+        if matched_code.valid == False: 
+            return jsonify({
+                "success": False,
+                "message": "Invalid Code or the code is already used. :("
+            }), 400
+
+        user.balance += matched_code.amount
+        matched_code.valid = False
+
+        try:
+            db_session.commit()
+            return jsonify({
+                "success": True,
+                'message': 'Recharged succesfully',
+                'currentBalance': user.balance
+            }), 200
+
+        except SQLAlchemyError:
+            db_session.rollback()
+            return jsonify({
+                "success": False,
+                'message': 'internal server error :('
+            }), 500
+
+    else:
+        return render_template("payments.html", user=user)
+
 
 @app.route("/reservation_data", methods=["GET", "POST"])
 @login_required
@@ -264,9 +305,18 @@ def remove_reservation():
     user_price = db_session.query(Tier.price_per_meal).filter(User.tier == Tier.tier).first()
     if not user_price:
         return jsonify({"success": False, "message": "User price not found"}), 400
+    
+    today = today = datetime.now().date()
 
     remove_reservation = request.get_json()
     obj_date = datetime.strptime(remove_reservation.get("date"), "%d %b %Y")  # expected date format from front end : 17 Jan 2025
+
+    if obj_date.date() < today: 
+        return jsonify({
+            "success": False,
+            "message": "Past date cant be removed!",
+        }), 400
+
     #return tuple containing the date
     reserved_date = db_session.query(Reservation).filter(Reservation.date == obj_date).first()
     if not reserved_date:
@@ -283,8 +333,9 @@ def remove_reservation():
         db_session.commit()
         return jsonify({
             "success": True,
-            "message": "Date removed",
-            "redirect": "/reservation"  # frontend will redirect
+            "message": f"Reservation removed for{remove_reservation.get("date")}",
+            # redirect
+            "redirect": "/reservation" 
         }), 200
     
     except SQLAlchemyError as e:
@@ -296,3 +347,78 @@ def remove_reservation():
             "message": "There is an internal server error, please try again :( ",
         }), 500
 
+
+@app.route("/personal_info", methods=["GET", "POST", "PATCH"])
+@login_required
+def personal_info():
+    user = db_session.query(User).filter(User.id == session["user_id"]).first()
+
+    if request.method == "POST":
+        return jsonify({
+            "user_data": {
+                'firstName': user.firstname,
+                'lastName': user.lastname,
+                'username': user.username,
+                'section': user.section,
+                'tier': user.tier,
+                'email': user.email
+            }
+        })
+    elif request.method == "PATCH":
+        data = request.get_json()
+        email = data.get("email")
+
+        if not email:
+            return jsonify({
+                "success": False,
+                "message": "You cannot reserve for a past date",
+            }), 400
+        
+        user.email = email
+
+        try:
+            db_session.commit()
+            return jsonify({
+                "success": True,
+                "message": "Email Changed successfully"
+            }), 200
+        
+        except SQLAlchemyError as e:
+            db_session.rollback()
+            print("SQLAlchemyError:", e)
+            
+            return jsonify({
+                "success": False,
+                "message": "There is an internal server error, please try again :( ",
+            }), 500
+    else:
+        return render_template("personal_info.html", user=user)
+
+@app.route('/history', methods=["GET", "POST"])
+@login_required
+def history():
+    user = db_session.query(User).filter(User.id == session["user_id"]).first()
+
+    if request.method == "POST":
+        user_reservation_list = db_session.query(Reservation).filter(Reservation.user_id == session["user_id"]).all()
+        user_price = db_session.query(Tier.price_per_meal).filter(User.tier == Tier.tier).first()
+        data = []
+
+        today = datetime.now().date()
+
+        for r in user_reservation_list:
+
+            if r.date.date() < today:
+
+                date = r.date.strftime('%d %b %Y')
+                data.append(
+                    {"date" : date}
+                )
+
+        return jsonify({
+            'data' : data,
+            'userPrice': user_price[0]
+        })
+    
+    else:
+        return render_template("history.html", user=user)
