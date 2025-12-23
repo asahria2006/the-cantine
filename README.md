@@ -9,10 +9,13 @@ The Cantine is a web application based on the Flask framework of Python! It is a
 For this project i had to extend my knowledge in SQLAlchelyORM, more intermidiate Javascript (async await concept) and Bootstrap. 
 
 ## Installation
-1. Clone the repository
+1. Clone the repository or download zip file
 2. Create a virtual environment
 3. Install dependencies with `pip install -r requirements.txt`
-4. Run `flask run`
+4. Run `flask run --debug`
+
+> [!NOTE]
+> Project require an internet connection to be able to get bootstrap icons. 
 
 ## Tech stack 
 - **HTML, CSS**
@@ -24,8 +27,7 @@ For this project i had to extend my knowledge in SQLAlchelyORM, more intermidiat
 
 ## Folders and Files
 Here is the list of the most important files of the application. 
-- Each HTML page has its own JS file for interactive functionality. 
-- For Bootstrap Icons
+Each HTML page has its own JS file for interactive functionality. 
 
 ### static
 This folder contains all CSS, JS, and images of the project.
@@ -114,8 +116,3 @@ This page shows users their personal information and lets them modify it. For no
 
 ### /history
 This page shows users all days they have eaten in the cantine. If a user reserved a day, did not cancel it, and the day is a passed day, that means the app counts that reserved day as a day the user has already eaten in the cantine.
-
-
-
-
-
