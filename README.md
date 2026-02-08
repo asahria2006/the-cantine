@@ -26,7 +26,7 @@ For this project i had to extend my knowledge in SQLAlchelyORM, more intermidiat
 - **SQLite3**, and **SQLAlchemy ORM**
 
 ## Folders and Files
-Here is the list of the most important files of the application. 
+Here is the list of the most important files of the application.\
 Each HTML page has its own JS file for interactive functionality. 
 
 ### static
@@ -42,7 +42,7 @@ Contains all HTML files of this website.
 Contains a helper function called `login_required()`, which prevents users from accessing all routes without login, except the login and register routes.
 
 ### models.py 
-In this file, I defined all SQLAlchemy ORM tables, and then those tables are imported in **app.py**.
+In this file, I defined all SQLAlchemyORM tables, and then those tables are imported in **app.py**.
 
 ### cantine.db
 This is the database file for SQLite3 which contains all data of the web application.

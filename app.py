@@ -37,11 +37,8 @@ FlaskSession(app)
 def index():
     user = db_session.query(User).filter(User.id == session["user_id"]).first()
 
-    if user.username == 'eid_rahman_2312':
-        bday = 'eid_rahman_2312'
-        return render_template("index.html", user_id=session["user_id"], user=user, bday=bday)
-    else:
-        return render_template("index.html", user_id=session["user_id"], user=user)
+
+    return render_template("index.html", user_id=session["user_id"], user=user)
 
 
 #login route

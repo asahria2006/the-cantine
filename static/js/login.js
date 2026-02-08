@@ -32,4 +32,34 @@ document.querySelector('#loginForm').addEventListener('submit', async (e) => {
         console.log(error);
     }
 
-})
+});
+
+
+document.getElementById('demoLogin').addEventListener('click', async () => {
+    const loginData = {
+        username: 'demo1',
+        password: 'demo1'
+    }
+    
+    try {
+
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(loginData)
+        }) 
+
+        const result = await response.json();
+
+        if (response.ok) {
+            window.location.href = result.redirect
+        } else {
+            alert(result.message)
+        }
+
+
+    } catch (error) {
+        console.log(error);
+    }
+
+});
