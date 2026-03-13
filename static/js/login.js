@@ -37,8 +37,8 @@ document.querySelector('#loginForm').addEventListener('submit', async (e) => {
 
 document.getElementById('demoLogin').addEventListener('click', async () => {
     const loginData = {
-        username: 'demo1',
-        password: 'demo1'
+        username: 'johndoe2',
+        password: 'demoJohnDoe2'
     }
     
     try {

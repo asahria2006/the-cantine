@@ -61,9 +61,11 @@ async function load() {
     document.getElementById('monthDisplay').innerText = 
         `${dt.toLocaleDateString('en-gb', {month: 'long'})} ${year}`;
 
-    calendar.innerHTML = '';
-
+    
+        
     events = await getEvents();
+        
+    calendar.innerHTML = '';
 
 
     // final loop to load the calendar
