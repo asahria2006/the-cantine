@@ -1,10 +1,10 @@
-# The Cantine
+# The Canteen
 
-#### Video demo: <link>
-#### Website link: https://the-cantine.up.railway.app/
+### Video demo: <link>
+### Website link: https://the-canteen.up.railway.app/
 
 ## Description: 
-The Cantine is a web application based on the Flask framework of Python! It is an application where you can make a reservation for the day you want to eat in your campus cantine. In this way, the cantine can be more organised and produce less food waste. The application is based on principal pages: **Index**, **Reservation**, **Payment**, **Personal Info**, and **History**. It also contains a user registration page and a login page. In fact, a user can log in or register and get some default balance. They can reserve a day in the reservation page, cancel the reservation, update their personal information, and recharge their account balance. Also, users can see the list of days they have eaten on the history page. 
+The canteen is a web application based on the Flask framework of Python! It is an application where you can make a reservation for the day you want to eat in your campus canteen. In this way, the canteen can be more organised and produce less food waste. The application is based on principal pages: **Index**, **Reservation**, **Payment**, **Personal Info**, and **History**. It also contains a user registration page and a login page. In fact, a user can log in or register and get some default balance. They can reserve a day in the reservation page, cancel the reservation, update their personal information, and recharge their account balance. Also, users can see the list of days they have eaten on the history page. 
 
 For this project i had to extend my knowledge in SQLAlchelyORM, more intermidiate Javascript (async await concept) and Bootstrap. 
 
