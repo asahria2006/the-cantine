@@ -1,4 +1,4 @@
-import {getDayColor, fetch_to_backend, getEvents, fetchRemovedReservation} from './reservation_util.js';
+import {getDayColor, fetch_to_backend, getEvents, fetchRemovedReservation, DATE_FORMAT} from './reservation_util.js';
 
 let nav = 0;
 let clicked = null;
@@ -61,11 +61,12 @@ async function load() {
     document.getElementById('monthDisplay').innerText = 
         `${dt.toLocaleDateString('en-gb', {month: 'long'})} ${year}`;
 
-    
         
     events = await getEvents();
+    console.log(events);
         
     calendar.innerHTML = '';
+    
 
 
     // final loop to load the calendar
@@ -113,11 +114,7 @@ async function load() {
 function openModal(date) {
     clicked = date;
 
-    const dateString = date.toLocaleDateString('en-GB', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-    });
+    const dateString = date.toLocaleDateString('en-GB', DATE_FORMAT);
 
     const reservedDay = events.find(e => e.date === dateString);
 
@@ -147,11 +144,7 @@ async function closeModal() {
 }
 
 async function saveEvent() {
-    const dateString = clicked.toLocaleDateString('en-GB', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-    });
+    const dateString = clicked.toLocaleDateString('en-GB', DATE_FORMAT);
 
     const reservedDay = events.find(e => e.date === dateString);
 
@@ -184,10 +177,10 @@ function initButton() {
 }
 
 async function loadReservedList() {
-    events = await getEvents();
+    const freshEvents = await getEvents();
     const today = new Date;
 
-    const filteredList = events.filter((element) => {
+    const filteredList = freshEvents.filter((element) => {
         element.dateObj = new Date(element.date);
 
         if (element.dateObj < today){
@@ -240,5 +233,10 @@ async function remove_reservation(date) {
 }
 
 initButton();
-load();
-loadReservedList();
+
+async function init() {
+    await load();
+    await loadReservedList();
+}
+
+init();

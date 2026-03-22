@@ -1,14 +1,16 @@
 import {toastMessage} from './layout.js';
 
+export const DATE_FORMAT = {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit'
+}
+
 export function getDayColor(day, events) {
 
     const obj = {color: '', icon: ''};
     const today = new Date();
-    const dateString = day.toLocaleDateString('en-GB', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-    });
+    const dateString = day.toLocaleDateString('en-GB', DATE_FORMAT);
     const reservedDay = events.find(e => e.date === dateString);
 
     if (day.toDateString() === today.toDateString() && !reservedDay) {
