@@ -9,7 +9,7 @@
         <div class="d-flex justify-content-around mt-5 mb-2">
             <div class="calendar-container col-8">
                 <div id="header" class="text-primary">
-                    <div id="monthDisplay"></div>
+                    <div id="monthDisplay" class="fw-bold"></div>
                     <div>
                         <button id="backButton" class="btn btn-primary px-3 shadow">Back</button>
                         <button id="nextButton" class="btn btn-primary px-3 shadow">Next</button>
@@ -29,7 +29,36 @@
                 <div id="calendar"></div>
             </div>
 
-            <div class="col-3">
+            <div class="col-3 pt-3">
+                <div class="p-2 border border-info-subtle rounded-1 shadow-sm bg-white mx-2">
+                    <div class="row g-2 text-primary fw-semibold fs-6 px-1 py-1">
+                        <div class="col-6 d-flex align-items-center gap-2">
+                            <div class="bg-white p-1">
+                                <span class="badge text-bg-info text-white rounded-pill px-3 me-1"><i class="bi bi-ban"></i></span>
+                                Unvailable 
+                            </div>   
+                        </div>
+                        <div class="col-6 d-flex align-items-center gap-2">
+                            <div class="bg-white p-1">
+                                <span class="badge text-bg-primary text-white rounded-pill px-3 me-1"><i class="bi bi-plus-lg"></i></span>
+                                Available 
+                            </div>   
+                        </div>
+                        <div class="col-6 d-flex align-items-center gap-2">
+                            <div class="bg-white p-1">
+                                <span class="badge text-bg-warning text-white rounded-pill px-3 me-1"><i class="bi bi-plus-lg"></i></span>
+                                Today 
+                            </div>   
+                        </div>
+                        <div class="col-6 d-flex align-items-center gap-2">
+                            <div class="bg-white p-1">
+                                <span class="badge text-bg-success text-white rounded-pill px-3 me-1"><i class="bi bi-check"></i></span>
+                                Reserved 
+                            </div>   
+                        </div>
+                    </div>
+                </div>
+
                 <p class="fs-5 fw-medium text-success mt-4 mb-3">Reserved Day:</p>
                 <ul class="text-success scrollable-list px-2" id="reservedList">
                     <!-- rendered by js  -->

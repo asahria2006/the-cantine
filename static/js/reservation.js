@@ -94,7 +94,7 @@ async function load() {
             // check if its reserved show green dot and directly make inner html
             if (color !== 'info') {
 
-                daySquare.classList.add('day-active');
+                daySquare.classList.add('day-active'); 
 
                 daySquare.addEventListener('click', () => {
                     openModal(currentDate);
