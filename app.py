@@ -44,7 +44,6 @@ def index():
 #login route
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    #clear any  existing session
 
     if request.method == 'POST':
         # get data from front-end
@@ -77,15 +76,7 @@ def login():
         
         # set session user id
         session["user_id"] = user.id
-        user.lastlogin = datetime.now()
         
-        try:
-            db_session.commit()
-        except SQLAlchemyError:
-            db_session.rollback()
-            return jsonify({
-                'message': 'internal server error :('
-            }), 500
         
         # redirect to index
         return jsonify({
@@ -95,10 +86,29 @@ def login():
         })
 
     else:
-        # render the page 
-        session.clear()
-        return render_template("login.html")
 
+        if session.get("user_id") is None:
+                # render the page 
+            session.clear()
+            return render_template("login.html")
+            
+        else:
+
+            user = db_session.query(User).filter(User.id == session["user_id"]).first()
+
+            user.lastlogin = datetime.now()
+
+            try:
+                db_session.commit()
+            except SQLAlchemyError:
+                db_session.rollback()
+                return jsonify({
+                    'message': 'internal server error :('
+                }), 500
+        
+            session.clear()
+            return render_template("login.html")
+        
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
