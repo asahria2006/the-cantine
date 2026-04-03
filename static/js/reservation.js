@@ -28,12 +28,15 @@ let events;
 async function load() {
     const dt = new Date();
 
-    if (nav !== 0){
+    if (nav !== 0) {
+        // setting day of dt in 1, otherwise it will crash on month with 31, 28, 29 or 30
+        // which cause problem for navigating months.
+        dt.setDate(1);
         dt.setMonth(new Date().getMonth() + nav);
     }
 
     // day, month, year of a current date
-    const day = dt.getDate();
+    // const day = dt.getDate();
     const month = dt.getMonth();
     const year = dt.getFullYear();
 
