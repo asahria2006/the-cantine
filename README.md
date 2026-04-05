@@ -1,6 +1,6 @@
 # The Canteen
 
-### Video demo: <link>
+### Video demo: https://youtu.be/VmotVe98vZs
 ### Website link: https://the-canteen.up.railway.app/
 
 ## Description: 
